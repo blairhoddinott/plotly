@@ -2,7 +2,9 @@ apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: userapi-ingress
-  namespace: kube-system
+  namespace: userapi
+  annotations:
+    traefik.ingress.kubernetes.io/router.entrypoints: web
 spec:
   rules:
     - host: userapi.weepytests.com
@@ -12,6 +14,6 @@ spec:
             pathType: Prefix
             backend:
               service:
-                name: userapi
+                name: userapi-service
                 port:
-                  number: 5000
+                  number: 80
