@@ -33,8 +33,21 @@ jobs:
     runs-on: [self-hosted]
     steps:
       - uses: actions/checkout@v1
-      - uses: actions-hub/kubectl@master
+      - name: deploy pods
+        uses: actions-hub/kubectl@master
         env:
           KUBE_CONFIG: ${{ secrets.KUBE_CONFIG }}
         with:
-          args: get pods -n userapi
+          args: apply -f k8s/userapi-deployment.yaml
+      - name: deploy svc
+        uses: actions-hub/kubectl@master
+        env:
+          KUBE_CONFIG: ${{ secrets.KUBE_CONFIG }}
+        with:
+          args: apply -f k8s/userapi-service.yaml
+      - name: deploy ingress
+        uses: actions-hub/kubectl@master
+        env:
+          KUBE_CONFIG: ${{ secrets.KUBE_CONFIG }}
+        with:
+          args: apply -f k8s/userapi-ingress.yaml
