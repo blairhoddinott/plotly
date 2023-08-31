@@ -1,0 +1,17 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: userapi-ingress
+  namespace: kube-system
+spec:
+  rules:
+    - host: userapi.weepytests.com
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: userapi
+                port:
+                  number: 5000

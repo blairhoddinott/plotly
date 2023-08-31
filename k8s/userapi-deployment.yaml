@@ -1,0 +1,28 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: userapi
+  namespace: userapi
+spec:
+  selector:
+    matchLabels:
+      app: userapi
+  replicas: 2
+  template:
+    metadata:
+      labels:
+        app: userapi
+    spec:
+      containers:
+      - name: userapi
+        image: userapi:dev
+        resources:
+          limits:
+            memory: 200Mi
+            cpu: 1000m
+          requests:
+            cpu: 100m
+            memory: 200Mi
+        ports:
+        - containerPort: 5000
