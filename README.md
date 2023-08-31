@@ -58,3 +58,11 @@ In the GitHub actions, I have the job pushing to my repository (`weepyadmin/plot
 Finally, in the file `userapi-ingress.yaml`, I have the FQDN for this container set to `userapi.weepytests.com`, which is what I was using for local testing. You will need to update this field (the `host` key) to the appropriate FQDN for your environment, so Traefik will route your traffic correctly.
 
 When code is checked in, the pipeline fires, deploys the container, service, ingress. 
+
+## Future Improvements
+
+Right now, this will build on all pushes. Future steps would be to extend the pipeline to build prod branches out into a production-only cluster. 
+
+I would also perhaps modify the pipeline so that it only builds out to dev cluster on a dev branch. This way all branches don't kick off and overwrite each other on the node. 
+
+I would further ask that unit testing be included, then we can incorporate unit testing as a base step for any/all deployments, and all pushes. I would make the deployment dependent on Unit Tests passing for production at least, but likely for any deployment environment. 
