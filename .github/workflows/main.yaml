@@ -21,4 +21,4 @@ jobs:
         run: docker build . --file Dockerfile --tag weepytest/plotly:dev
         
       - name: Docker Push
-        run: docker push weepytest/plotly
+        run: docker push weepytest/plotly:dev
